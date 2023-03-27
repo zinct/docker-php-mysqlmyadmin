@@ -32,9 +32,19 @@ services:
     image: mysql:latest
     volumes:
       - ./mysql/data:/var/lib/mysql
+    # - ./mysql/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
     environment:
       - MYSQL_DATABASE=kasirin
       - MYSQL_ROOT_PASSWORD=
       - MYSQL_ALLOW_EMPTY_PASSWORD=TRUE
     ports:
       - 3306:3306
+
+  phpmyadmin:
+    networks:
+      - kasirin
+    image: phpmyadmin:latest
+    environment:
+      - PMA_HOST=db
+    ports:
+      - 8077:80
